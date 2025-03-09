@@ -27,8 +27,8 @@ serde_json = { version = "1.0.140", features = ["indexmap", "preserve_order"]}
 serde_yaml = { version = "0.9.34" }
 toml = { version = "0.8.20", features = ["indexmap", "preserve_order"] }
 plist = { version = "1.7.0" }
+tera = { version = "1.20.0", features = ["preserve_order", "date-locale"] }
 # rust-ini = { version = "0.21.1", features = ["brackets-in-section-names"] }
-# tera = { version = "1.20.0", features = ["preserve_order", "date-locale"] }
 
 [features]
 os_str_display = []
