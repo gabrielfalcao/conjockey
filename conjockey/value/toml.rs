@@ -6,7 +6,7 @@ impl From<Toml> for Value {
         match value  {
             Toml::Boolean(value) => Value::Boolean(value),
             Toml::String(value) => Value::String(value),
-            _ => Value::Boolean(false)
+            _ => Value::Null,
         }
     }
 }
@@ -17,6 +17,7 @@ impl Into<Toml> for Value {
         match self  {
             Value::Boolean(value) => Toml::Boolean(value),
             Value::String(value) => Toml::String(value),
+            Value::Null => Toml::Boolean(false),
         }
     }
 }

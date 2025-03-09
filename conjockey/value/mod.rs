@@ -1,12 +1,14 @@
+mod null;
 mod boolean;
+mod string;
 mod json;
 mod plist;
-mod string;
 mod toml;
 mod yaml;
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum Value {
+    Null,
     Boolean(bool),
     String(String),
     // Integer(Integer),
