@@ -10,7 +10,7 @@ autoexamples = false
 autobenches = false
 homepage = "https://github.com/gabrielfalcao/conjockey"
 authors = ["Gabriel Falcão DeMoura <gabrielteratos@gmail.com>"]
-license = "CC0-1.0"
+license = "MIT"
 
 [lib]
 name = "conjockey"
