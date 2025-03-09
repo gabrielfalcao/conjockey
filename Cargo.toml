@@ -30,7 +30,7 @@ serde_json = { version = "1.0.140", features = ["indexmap", "preserve_order"]}
 # tera = { version = "1.20.0", features = ["preserve_order", "date-locale"], optional = true }
 
 [features]
-serde_json = ["dep:serde_json"]
+# serde_json = ["dep:serde_json"]
 # serde_yaml = ["dep:serde_yaml"]
 # toml = ["dep:toml"]
 # rust-ini = ["dep:rust-ini"]
