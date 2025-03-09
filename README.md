@@ -16,4 +16,4 @@ For instance, cooperation with the following crates is either intended or planne
 
 ## Warning
 
-The author believes inline comments in configuration languages SHALL NOT be supported.
+The author believes inline comments SHALL NOT be supported.
