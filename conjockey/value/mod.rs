@@ -1,5 +1,6 @@
 mod boolean;
 mod json;
+mod plist;
 mod string;
 mod toml;
 mod yaml;
