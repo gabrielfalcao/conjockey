@@ -2,13 +2,13 @@ use crate::value::Value;
 use toml::Value as Toml;
 
 #[test]
-fn test_serde_toml_string() {
+fn test_serde_toml_integer() {
     assert_eq!(
-        Toml::String(String::from("String")),
-        Into::<Toml>::into(Value::String(String::from("String"))),
+        Toml::Integer(5),
+        Into::<Toml>::into(Value::Integer(Integer(5))),
     );
     assert_eq!(
-        Value::String(String::from("String")),
-        Into::<Value>::into(Value::String(String::from("String"))),
+        Value::Integer(Integer(5)),
+        Into::<Value>::into(Value::Integer(Integer(5))),
     );
 }

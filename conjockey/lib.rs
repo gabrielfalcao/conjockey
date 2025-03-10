@@ -1,5 +1,5 @@
 #![feature(os_str_display)]
-
+#![allow(stable_features)]
 pub mod errors;
 pub use errors::*;
 pub mod value;

@@ -92,3 +92,85 @@ impl std::cmp::Ord for Integer {
 }
 
 impl crate::traits::ops::algebraic::AlgebraicOperations for Integer {}
+
+impl From<i64> for Integer {
+    fn from(value: i64) -> Integer {
+        Integer(value)
+    }
+}
+
+impl From<i32> for Integer {
+    fn from(value: i32) -> Integer {
+        Integer(Into::<i64>::into(value))
+    }
+}
+
+impl Integer {
+    pub fn is_signed(self) -> bool {
+        self.0 < 0
+    }
+    pub fn is_unsigned(self) -> bool {
+        self.0 >= 0
+    }
+    pub fn as_signed(self) -> Option<i64> {
+        if self.is_signed() {
+            Some(self.0)
+        } else {
+            None
+        }
+    }
+    pub fn as_unsigned(self) -> Option<u64> {
+        self.as_unsigned_u64()
+    }
+    pub fn as_unsigned_u64(self) -> Option<u64> {
+        match TryInto::<u64>::try_into(self.0) {
+            Ok(value) => Some(value),
+            Err(_) => None,
+        }
+    }
+    pub fn as_unsigned_u32(self) -> Option<u32> {
+        match TryInto::<u32>::try_into(self.0) {
+            Ok(value) => Some(value),
+            Err(_) => None,
+        }
+    }
+    pub fn as_unsigned_u16(self) -> Option<u16> {
+        match TryInto::<u16>::try_into(self.0) {
+            Ok(value) => Some(value),
+            Err(_) => None,
+        }
+    }
+    pub fn as_unsigned_u8(self) -> Option<u8> {
+        match TryInto::<u8>::try_into(self.0) {
+            Ok(value) => Some(value),
+            Err(_) => None,
+        }
+    }
+    pub fn to_unsigned(self) -> u64 {
+        self.to_unsigned_u64()
+    }
+    pub fn to_unsigned_u64(self) -> u64 {
+        match self.as_unsigned_u64() {
+            Some(value) => value,
+            None => panic!("{} cannot be converted into u64", self.0),
+        }
+    }
+    pub fn to_unsigned_u32(self) -> u32 {
+        match self.as_unsigned_u32() {
+            Some(value) => value,
+            None => panic!("{} cannot be converted into u32", self.0),
+        }
+    }
+    pub fn to_unsigned_u16(self) -> u16 {
+        match self.as_unsigned_u16() {
+            Some(value) => value,
+            None => panic!("{} cannot be converted into u16", self.0),
+        }
+    }
+    pub fn to_unsigned_u8(self) -> u8 {
+        match self.as_unsigned_u8() {
+            Some(value) => value,
+            None => panic!("{} cannot be converted into u8", self.0),
+        }
+    }
+}
