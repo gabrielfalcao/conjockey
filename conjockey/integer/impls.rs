@@ -113,10 +113,57 @@ impl Integer {
         self.0 >= 0
     }
     pub fn as_signed(self) -> Option<i64> {
-        if self.is_signed() {
-            Some(self.0)
-        } else {
-            None
+        self.as_signed_i64()
+    }
+    pub fn as_signed_i64(self) -> Option<i64> {
+        match TryInto::<i64>::try_into(self.0) {
+            Ok(value) => Some(value),
+            Err(_) => None,
+        }
+    }
+    pub fn as_signed_i32(self) -> Option<i32> {
+        match TryInto::<i32>::try_into(self.0) {
+            Ok(value) => Some(value),
+            Err(_) => None,
+        }
+    }
+    pub fn as_signed_i16(self) -> Option<i16> {
+        match TryInto::<i16>::try_into(self.0) {
+            Ok(value) => Some(value),
+            Err(_) => None,
+        }
+    }
+    pub fn as_signed_i8(self) -> Option<i8> {
+        match TryInto::<i8>::try_into(self.0) {
+            Ok(value) => Some(value),
+            Err(_) => None,
+        }
+    }
+    pub fn to_signed(self) -> i64 {
+        self.to_signed_i64()
+    }
+    pub fn to_signed_i64(self) -> i64 {
+        match self.as_signed() {
+            Some(value) => value,
+            None => panic!("{} cannot be converted into i64", self.0),
+        }
+    }
+    pub fn to_signed_i32(self) -> i32 {
+        match self.as_signed_i32() {
+            Some(value) => value,
+            None => panic!("{} cannot be converted into i32", self.0),
+        }
+    }
+    pub fn to_signed_i16(self) -> i16 {
+        match self.as_signed_i16() {
+            Some(value) => value,
+            None => panic!("{} cannot be converted into i16", self.0),
+        }
+    }
+    pub fn to_signed_i8(self) -> i8 {
+        match self.as_signed_i8() {
+            Some(value) => value,
+            None => panic!("{} cannot be converted into i8", self.0),
         }
     }
     pub fn as_unsigned(self) -> Option<u64> {
@@ -241,3 +288,72 @@ impl std::ops::ShlAssign for Integer {
 }
 
 impl crate::traits::ops::LogicalOperations for Integer {}
+
+impl From<::serde_json::Number> for Integer {
+    fn from(value: ::serde_json::Number) -> Integer {
+        match value.as_i64() {
+            Some(value) => Integer(value),
+            None => panic!("can not convert {:#?} into i64 for conjockey::Integer", value),
+        }
+    }
+}
+
+impl Into<::serde_json::Number> for Integer {
+    fn into(self) -> ::serde_json::Number {
+        Into::<::serde_json::Number>::into(self.to_signed())
+    }
+}
+
+impl From<::serde_yaml::Number> for Integer {
+    fn from(value: ::serde_yaml::Number) -> Integer {
+        match value.as_i64() {
+            Some(value) => Integer(value),
+            None => panic!("can not convert {:#?} into i64 for conjockey::Integer", value),
+        }
+    }
+}
+
+impl Into<::serde_yaml::Number> for Integer {
+    fn into(self) -> ::serde_yaml::Number {
+        Into::<::serde_yaml::Number>::into(self.to_signed())
+    }
+}
+
+impl Into<i64> for Integer {
+    fn into(self) -> i64 {
+        self.to_signed_i64()
+    }
+}
+
+impl Into<i32> for Integer {
+    fn into(self) -> i32 {
+        self.to_signed_i32()
+    }
+}
+
+impl Into<i16> for Integer {
+    fn into(self) -> i16 {
+        self.to_signed_i16()
+    }
+}
+
+impl Into<i8> for Integer {
+    fn into(self) -> i8 {
+        self.to_signed_i8()
+    }
+}
+
+impl From<::plist::Integer> for Integer {
+    fn from(value: ::plist::Integer) -> Integer {
+        match value.as_signed() {
+            Some(value) => Integer(value),
+            None => panic!("can not convert {:#?} into i64 for conjockey::Integer", value),
+        }
+    }
+}
+
+impl Into<::plist::Integer> for Integer {
+    fn into(self) -> ::plist::Integer {
+        Into::<::plist::Integer>::into(self.to_signed())
+    }
+}
