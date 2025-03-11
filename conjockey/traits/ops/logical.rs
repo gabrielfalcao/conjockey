@@ -10,8 +10,6 @@ pub trait LogicalOperations:
     + std::ops::ShlAssign
     + std::ops::Shr
     + std::ops::ShrAssign
-    + std::ops::Sub
-    + std::ops::SubAssign
     + std::cmp::Eq
     + std::cmp::Ord
     + std::cmp::PartialEq

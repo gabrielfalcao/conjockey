@@ -174,3 +174,70 @@ impl Integer {
         }
     }
 }
+
+impl std::ops::BitAnd for Integer {
+    type Output = Integer;
+    fn bitand(self, rhs: Integer) -> Integer {
+        Integer(self.as_i64() & rhs.as_i64())
+    }
+}
+
+impl std::ops::BitOr for Integer {
+    type Output = Integer;
+    fn bitor(self, rhs: Integer) -> Integer {
+        Integer(self.as_i64() | rhs.as_i64())
+    }
+}
+
+impl std::ops::BitAndAssign for Integer {
+    fn bitand_assign(&mut self, rhs: Integer) {
+        self.0 &= rhs.as_i64()
+    }
+}
+
+impl std::ops::BitOrAssign for Integer {
+    fn bitor_assign(&mut self, rhs: Integer) {
+        self.0 |= rhs.as_i64()
+    }
+}
+
+impl std::ops::BitXor for Integer {
+    type Output = Integer;
+    fn bitxor(self, rhs: Integer) -> Integer {
+        Integer(self.as_i64() ^ rhs.as_i64())
+    }
+}
+
+impl std::ops::BitXorAssign for Integer {
+    fn bitxor_assign(&mut self, rhs: Integer) {
+        self.0 ^= rhs.as_i64()
+    }
+}
+
+impl std::ops::Shr for Integer {
+    type Output = Integer;
+    fn shr(self, rhs: Integer) -> Integer {
+        Integer(self.as_i64() >> rhs.as_i64())
+    }
+}
+
+impl std::ops::Shl for Integer {
+    type Output = Integer;
+    fn shl(self, rhs: Integer) -> Integer {
+        Integer(self.as_i64() << rhs.as_i64())
+    }
+}
+
+impl std::ops::ShrAssign for Integer {
+    fn shr_assign(&mut self, rhs: Integer) {
+        self.0 >>= rhs.as_i64()
+    }
+}
+
+impl std::ops::ShlAssign for Integer {
+    fn shl_assign(&mut self, rhs: Integer) {
+        self.0 <<= rhs.as_i64()
+    }
+}
+
+impl crate::traits::ops::LogicalOperations for Integer {}
