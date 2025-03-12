@@ -9,6 +9,6 @@ fn test_plist_string() {
     );
     assert_eq!(
         Value::String(String::from("String")),
-        Into::<Value>::into(Value::String(String::from("String"))),
+        Into::<Value>::into(Plist::String(String::from("String"))),
     );
 }

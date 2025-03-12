@@ -1,4 +1,7 @@
 use crate::integer::Integer;
+use crate::value::Value;
+use crate::errors::Error;
+use std::any::TypeId;
 
 impl std::ops::Add for Integer {
     type Output = Integer;
@@ -101,6 +104,16 @@ impl From<i64> for Integer {
 
 impl From<i32> for Integer {
     fn from(value: i32) -> Integer {
+        Integer(Into::<i64>::into(value))
+    }
+}
+impl From<i16> for Integer {
+    fn from(value: i16) -> Integer {
+        Integer(Into::<i64>::into(value))
+    }
+}
+impl From<i8> for Integer {
+    fn from(value: i8) -> Integer {
         Integer(Into::<i64>::into(value))
     }
 }
@@ -289,35 +302,6 @@ impl std::ops::ShlAssign for Integer {
 
 impl crate::traits::ops::LogicalOperations for Integer {}
 
-impl From<::serde_json::Number> for Integer {
-    fn from(value: ::serde_json::Number) -> Integer {
-        match value.as_i64() {
-            Some(value) => Integer(value),
-            None => panic!("can not convert {:#?} into i64 for conjockey::Integer", value),
-        }
-    }
-}
-
-impl Into<::serde_json::Number> for Integer {
-    fn into(self) -> ::serde_json::Number {
-        Into::<::serde_json::Number>::into(self.to_signed())
-    }
-}
-
-impl From<::serde_yaml::Number> for Integer {
-    fn from(value: ::serde_yaml::Number) -> Integer {
-        match value.as_i64() {
-            Some(value) => Integer(value),
-            None => panic!("can not convert {:#?} into i64 for conjockey::Integer", value),
-        }
-    }
-}
-
-impl Into<::serde_yaml::Number> for Integer {
-    fn into(self) -> ::serde_yaml::Number {
-        Into::<::serde_yaml::Number>::into(self.to_signed())
-    }
-}
 
 impl Into<i64> for Integer {
     fn into(self) -> i64 {
@@ -347,7 +331,10 @@ impl From<::plist::Integer> for Integer {
     fn from(value: ::plist::Integer) -> Integer {
         match value.as_signed() {
             Some(value) => Integer(value),
-            None => panic!("can not convert {:#?} into i64 for conjockey::Integer", value),
+            None => panic!(
+                "can not convert {:#?} into i64 for conjockey::Integer",
+                value
+            ),
         }
     }
 }
@@ -355,5 +342,19 @@ impl From<::plist::Integer> for Integer {
 impl Into<::plist::Integer> for Integer {
     fn into(self) -> ::plist::Integer {
         Into::<::plist::Integer>::into(self.to_signed())
+    }
+}
+
+impl TryFrom<Value> for Integer {
+    type Error = Error;
+    fn try_from(value: Value) -> Result<Integer, Error> {
+        match value {
+            Value::Integer(value) => Ok(value),
+            _ => Err(Error::TryFromError(format!(
+                "can not convert {:#?} to {:#?}",
+                value,
+                TypeId::of::<Integer>()
+            ))),
+        }
     }
 }

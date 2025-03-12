@@ -6,6 +6,7 @@ impl From<Yaml> for Value {
         match value {
             Yaml::Bool(value) => Value::Boolean(value),
             Yaml::String(value) => Value::String(value),
+            Yaml::Number(value) => Value::Integer(value.into()),
             Yaml::Null | _ => Value::Null,
         }
     }
@@ -16,7 +17,8 @@ impl Into<Yaml> for Value {
         match self {
             Value::Boolean(value) => Yaml::Bool(value),
             Value::String(value) => Yaml::String(value),
-            Value::Null => Yaml::Null,
+            Value::Integer(value) => Yaml::Number(value.into()),
+            Value::Null | _ => Yaml::Null,
         }
     }
 }

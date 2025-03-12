@@ -9,6 +9,6 @@ fn test_serde_toml_string() {
     );
     assert_eq!(
         Value::String(String::from("String")),
-        Into::<Value>::into(Value::String(String::from("String"))),
+        Into::<Value>::into(Toml::String(String::from("String"))),
     );
 }

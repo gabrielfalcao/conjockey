@@ -9,6 +9,6 @@ fn test_serde_yaml_string() {
     );
     assert_eq!(
         Value::String(String::from("String")),
-        Into::<Value>::into(Value::String(String::from("String"))),
+        Into::<Value>::into(Yaml::String(String::from("String"))),
     );
 }
