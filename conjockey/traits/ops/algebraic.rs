@@ -7,7 +7,6 @@ pub trait AlgebraicOperations:
     + std::ops::Mul
     + std::ops::MulAssign
     + std::ops::Neg
-    + std::ops::Not
     + std::ops::Rem
     + std::ops::RemAssign
     + std::ops::Sub

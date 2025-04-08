@@ -7,6 +7,7 @@ impl From<Plist> for Value {
             Plist::Boolean(value) => Value::Boolean(value),
             Plist::String(value) => Value::String(value),
             Plist::Integer(value) => Value::Integer(value.into()),
+            Plist::Real(value) => Value::Float(value.into()),
             _ => Value::Null,
         }
     }
@@ -18,6 +19,7 @@ impl Into<Plist> for Value {
             Value::Boolean(value) => Plist::Boolean(value),
             Value::String(value) => Plist::String(value),
             Value::Integer(value) => Plist::Integer(value.into()),
+            Value::Float(value) => Plist::Real(value.into()),
             Value::Null | _ => Plist::Boolean(false),
         }
     }

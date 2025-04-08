@@ -1,6 +1,6 @@
 use crate::integer::Integer;
 use crate::value::Value;
-use toml::Value as Toml;
+use ::toml::Value as Toml;
 
 #[test]
 fn test_toml_integer() {

@@ -6,6 +6,7 @@ pub trait LogicalOperations:
     + std::ops::BitOrAssign
     + std::ops::BitXor
     + std::ops::BitXorAssign
+    + std::ops::Not
     + std::ops::Shl
     + std::ops::ShlAssign
     + std::ops::Shr

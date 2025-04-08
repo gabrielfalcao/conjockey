@@ -1,4 +1,5 @@
 use crate::integer::Integer;
+use crate::float::Float;
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum Value {
@@ -6,7 +7,7 @@ pub enum Value {
     Boolean(bool),
     String(String),
     Integer(Integer),
-    // Float(Float),
+    Float(Float),
     // DateTime(DateTime),
     // Array(Array),
     // Map(Map<String, Value>),

@@ -8,3 +8,5 @@ pub mod traits;
 pub use traits::*;
 pub mod integer;
 pub use integer::*;
+pub mod float;
+pub use float::*;

@@ -7,6 +7,7 @@ impl From<Toml> for Value {
             Toml::Boolean(value) => Value::Boolean(value),
             Toml::String(value) => Value::String(value),
             Toml::Integer(value) => Value::Integer(value.into()),
+            Toml::Float(value) => Value::Float(value.into()),
             _ => Value::Null,
         }
     }
@@ -19,6 +20,7 @@ impl Into<Toml> for Value {
             Value::Boolean(value) => Toml::Boolean(value),
             Value::String(value) => Toml::String(value),
             Value::Integer(value) => Toml::Integer(value.into()),
+            Value::Float(value) => Toml::Float(value.into()),
             Value::Null | _  => Toml::Boolean(false),
         }
     }

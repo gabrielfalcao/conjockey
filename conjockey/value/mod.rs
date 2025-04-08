@@ -7,5 +7,6 @@ mod toml;
 mod yaml;
 mod value;
 mod integer;
+mod float;
 
 pub use value::*;
